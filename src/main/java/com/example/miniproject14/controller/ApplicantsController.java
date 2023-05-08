@@ -38,7 +38,7 @@ public class ApplicantsController {
         try {
             return applicantsService.deleteApplicants(applicantsRequestDto, userDetails.getUser());
         } catch (Exception e) {
-            return new ResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST.value()); // 예외 발생시 에러 내용, Httpstatus(400)을 리턴값으로 전달한다.
+            return new ResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST.value()); // 예외 발생시 에러 내용, Httpstatus(400)을 리턴값으로 전달한다.!
         }
     }
 }
