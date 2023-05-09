@@ -21,6 +21,7 @@ public class BoardResponseDto implements GeneralResponseDto{
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private List<String> applyUsers;
+    private List<Long> applyUserId;
     private List<CommentResponseDto> commentList;
 
 
@@ -54,6 +55,9 @@ public class BoardResponseDto implements GeneralResponseDto{
                 .map(applicant -> applicant.getUser().getNickname())
                 .collect(Collectors.toList());
         this.memberNum = this.applyUsers.size();
+        this.applyUserId=board.getApplicants().stream()
+                .map(applicant -> applicant.getUser().getId())
+                .collect(Collectors.toList());
         this.commentList = commentResponseDtoList;
     }
 }
