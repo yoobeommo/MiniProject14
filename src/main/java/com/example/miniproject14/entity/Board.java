@@ -49,6 +49,9 @@ public class Board extends Timestamped {
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Applicants> applicants = new ArrayList<>();
 
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> commentList = new ArrayList<>();
+
     // Getter를 수정하여 실시간으로 참가자 수를 계산
     public int getMemberNum() {
         return applicants.size();

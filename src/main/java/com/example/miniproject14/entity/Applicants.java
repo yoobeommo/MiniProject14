@@ -29,7 +29,5 @@ public class Applicants extends Timestamped{
     public Applicants(Board board, User user) {
         this.board = board;
         this.user = user;
-
-
     }
 }

@@ -30,6 +30,9 @@ public class Comment extends Timestamped{
     private User user;
 
     @Column(nullable = false)
+    private String nickname;
+
+    @Column(nullable = false)
     private String contents;
 
     @CreatedDate
@@ -43,9 +46,11 @@ public class Comment extends Timestamped{
         this.board = board;
         this.user = user;
         this.contents = requestDto.getContents();
+        this.nickname = user.getNickname();
     }
 
     public void update(CommentRequestDto requestDto){
         this.contents = requestDto.getContents();
+//        this.nickname = user.getNickname();
     }
 }
