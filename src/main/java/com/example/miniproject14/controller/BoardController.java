@@ -32,18 +32,18 @@ public class BoardController {
     }
 
     //ReadByID
-    @GetMapping("/boards/{id}")
-    public GeneralResponseDto getBoard(@PathVariable Long id){
-        return boardService.getBoard(id);
+    @GetMapping("/boards/{boardId}")
+    public GeneralResponseDto getBoard(@PathVariable Long boardId){
+        return boardService.getBoard(boardId);
     }
 
-    @PutMapping("/boards/{id}")
-    public GeneralResponseDto updateBoard(@PathVariable Long id, @RequestBody BoardRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return boardService.updateBoard(id, requestDto, userDetails);
+    @PutMapping("/boards/{boardId}")
+    public GeneralResponseDto updateBoard(@PathVariable Long boardId, @RequestBody BoardRequestDto requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return boardService.updateBoard(boardId, requestDto, userDetails);
     }
 
-    @DeleteMapping("/boards/{id}")
-    public StatusResponseDto deleteBoard(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return boardService.deleteBoard(id, userDetails);
+    @DeleteMapping("/boards/{boardId}")
+    public StatusResponseDto deleteBoard(@PathVariable Long boardId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        return boardService.deleteBoard(boardId, userDetails);
     }
 }
