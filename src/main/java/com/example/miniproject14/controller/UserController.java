@@ -1,15 +1,15 @@
 package com.example.miniproject14.controller;
 
+import com.example.miniproject14.dto.GeneralResponseDto;
 import com.example.miniproject14.dto.LoginRequestDto;
-import com.example.miniproject14.dto.ResponseDto;
 import com.example.miniproject14.dto.SignupRequestDto;
 import com.example.miniproject14.service.UserService;
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -24,14 +24,14 @@ public class UserController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<ResponseDto> signup(
+    public ResponseEntity<GeneralResponseDto> signup(
             @RequestBody @Valid SignupRequestDto signupRequestDto) {
         return ResponseEntity.ok().body(userService.signup(signupRequestDto));
     }
 
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseDto> login(
+    public ResponseEntity<GeneralResponseDto > login(
             @RequestBody LoginRequestDto loginRequestDto,
             HttpServletResponse response) {
         return ResponseEntity.ok().body(userService.login(loginRequestDto, response));

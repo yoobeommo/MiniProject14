@@ -2,7 +2,7 @@ package com.example.miniproject14.controller;
 
 import com.example.miniproject14.dto.ApplicantsRequestDto;
 import com.example.miniproject14.dto.GeneralResponseDto;
-import com.example.miniproject14.dto.ResponseDto;
+import com.example.miniproject14.dto.StatusResponseDto;
 import com.example.miniproject14.entity.Board;
 import com.example.miniproject14.security.UserDetailsImpl;
 import com.example.miniproject14.service.ApplicantsService;
@@ -28,17 +28,17 @@ public class ApplicantsController {
 
             return applicantsService.addApplicants(board, userDetails.getUser());
         } catch (Exception e) {
-            return new ResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST.value()); // 예외 발생시 에러 내용, Httpstatus(400)을 리턴값으로 전달한다.
+            return new StatusResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST); // 예외 발생시 에러 내용, Httpstatus(400)을 리턴값으로 전달한다.
         }
     }
 
     @ResponseBody
     @DeleteMapping("/applicants")
-    public ResponseDto DeleteApplicants(@RequestBody ApplicantsRequestDto applicantsRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public GeneralResponseDto  DeleteApplicants(@RequestBody ApplicantsRequestDto applicantsRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         try {
             return applicantsService.deleteApplicants(applicantsRequestDto, userDetails.getUser());
         } catch (Exception e) {
-            return new ResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST.value()); // 예외 발생시 에러 내용, Httpstatus(400)을 리턴값으로 전달한다.!
+            return new StatusResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST); // 예외 발생시 에러 내용, Httpstatus(400)을 리턴값으로 전달한다.!
         }
     }
 }
