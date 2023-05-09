@@ -10,16 +10,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoardRequestDto implements GeneralResponseDto{
-    private Long id;
+//    private Long id;
     private String type;
     private String title;
     private String date;
-    private int memberNum;
+//    private int memberNum;
     private int totalMember;
     private String contents;
     private String nickname;
-    private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
+//    private LocalDateTime createdAt;
+//    private LocalDateTime modifiedAt;
 
     public void setNickname(String nickname) {
         this.nickname = nickname;

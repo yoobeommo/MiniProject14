@@ -58,7 +58,7 @@ public class Board extends Timestamped {
         this.type = requestDto.getType();
         this.title = requestDto.getTitle();
         this.date = requestDto.getDate();
-        this.memberNum = requestDto.getMemberNum();
+//        this.memberNum = requestDto.getMemberNum();
         this.totalMember = requestDto.getTotalMember();
         this.contents = requestDto.getContents();
         this.nickname = requestDto.getNickname();
@@ -68,7 +68,7 @@ public class Board extends Timestamped {
         this.type = requestDto.getType();
         this.title = requestDto.getTitle();
         this.date = requestDto.getDate();
-        this.memberNum = requestDto.getMemberNum();
+//        this.memberNum = requestDto.getMemberNum();
         this.totalMember = requestDto.getTotalMember();
         this.contents = requestDto.getContents();
     }

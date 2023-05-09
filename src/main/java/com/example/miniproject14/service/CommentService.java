@@ -28,45 +28,45 @@ public class CommentService {
 
 
 
-    // ´ñ±Û ÀÛ¼º ¸Ş¼­µå
+    // ëŒ“ê¸€ ì‘ì„± ë©”ì„œë“œ
     @Transactional
     public StatusResponseDto createComment(CommentRequestDto requestDto, UserDetailsImpl userDetails){
         Board board = boardRepository.findById(requestDto.getBoardId()).orElseThrow(
-                () -> new NullPointerException("Á¸ÀçÇÏÁö ¾Ê´Â °Ô½Ã±ÛÀÔ´Ï´Ù.")   // ¿¹¿ÜÃ³¸® ¹æ¹ıÀÌ³ª ¸Ş¼¼Áö ¼öÁ¤
+                () -> new NullPointerException("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²Œì‹œê¸€ì…ë‹ˆë‹¤.")   // ì˜ˆì™¸ì²˜ë¦¬ ë°©ë²•ì´ë‚˜ ë©”ì„¸ì§€ ìˆ˜ì •
         );
         Comment comment = new Comment(requestDto, board, userDetails.getUser());
         commentRepository.save(comment);
-        return new StatusResponseDto("´ñ±Û ÀÛ¼º¿Ï·á", HttpStatus.OK); // test ¸¦ À§ÇØ "´ñ±Û ÀÛ¼º¿Ï·á" ·Î Ãâ·Â
+        return new StatusResponseDto("ëŒ“ê¸€ ì‘ì„±ì™„ë£Œ", HttpStatus.OK); // test ë¥¼ ìœ„í•´ "ëŒ“ê¸€ ì‘ì„±ì™„ë£Œ" ë¡œ ì¶œë ¥
     }
 
-    //´ñ±Û ¼öÁ¤ ¸Ş¼­µå
+    //ëŒ“ê¸€ ìˆ˜ì • ë©”ì„œë“œ
     @Transactional
     public StatusResponseDto updateComment(Long commentId, CommentRequestDto requestDto, UserDetailsImpl userDetails){
         Board board = boardRepository.findById(requestDto.getBoardId()).orElseThrow(
-                () -> new NullPointerException("Á¸ÀçÇÏÁö ¾Ê´Â °Ô½Ã±ÛÀÔ´Ï´Ù.")   // NullPointerException À¸·Î Ã³¸®ÇÏ´Â ¿À·ùµéÀÌ Ã³¸®µÇÁö ¾ÊÀ½
+                () -> new NullPointerException("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê²Œì‹œê¸€ì…ë‹ˆë‹¤.")   // NullPointerException ìœ¼ë¡œ ì²˜ë¦¬í•˜ëŠ” ì˜¤ë¥˜ë“¤ì´ ì²˜ë¦¬ë˜ì§€ ì•ŠìŒ
         );
         Comment comment = commentRepository.findById(commentId).orElseThrow(
-                () -> new NullPointerException("Á¸ÀçÇÏÁö ¾Ê´Â ´ñ±ÛÀÔ´Ï´Ù.")
+                () -> new NullPointerException("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ëŒ“ê¸€ì…ë‹ˆë‹¤.")
         );
-        // User ÀÇ username ÇÊµå´Â (¾Æ¸¶ loginid) uniqe °ªÀÌ±â ¶§¹®¿¡ °°Àº »ç¿ëÀÚÀÎÁö ÆÇº°ÇÏ±â À§ÇØ »ç¿ë :: userDetails.impl ¿¡¼­ id ¸¦ ¹İÈ¯ÇÏ´Â ¸Ş¼­µå°¡ ÀÖÀ¸¸é ÁÁÀ» µí
+        // User ì˜ username í•„ë“œëŠ” (ì•„ë§ˆ loginid) uniqe ê°’ì´ê¸° ë•Œë¬¸ì— ê°™ì€ ì‚¬ìš©ìì¸ì§€ íŒë³„í•˜ê¸° ìœ„í•´ ì‚¬ìš© :: userDetails.impl ì—ì„œ id ë¥¼ ë°˜í™˜í•˜ëŠ” ë©”ì„œë“œê°€ ìˆìœ¼ë©´ ì¢‹ì„ ë“¯
         if(comment.getUser().getUsername().equals(userDetails.getUsername())){
             comment.update(requestDto);
-            return new StatusResponseDto("´ñ±Û ¼öÁ¤ ¿Ï·á", HttpStatus.OK);
+            return new StatusResponseDto("ëŒ“ê¸€ ìˆ˜ì • ì™„ë£Œ", HttpStatus.OK);
         }
-        return new StatusResponseDto("Á÷Á¢ ÀÛ¼ºÇÑ ´ñ±Û¸¸ ¼öÁ¤ÇÒ ¼ö ÀÖ½À´Ï´Ù.",HttpStatus.BAD_REQUEST);
+        return new StatusResponseDto("ì§ì ‘ ì‘ì„±í•œ ëŒ“ê¸€ë§Œ ìˆ˜ì •í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.",HttpStatus.BAD_REQUEST);
     }
 
-    //´ñ±Û »èÁ¦ ¸Ş¼­µå
+    //ëŒ“ê¸€ ì‚­ì œ ë©”ì„œë“œ
     @Transactional
     public StatusResponseDto deleteComment(Long commentId, UserDetailsImpl userDetails){
         Comment comment = commentRepository.findById(commentId).orElseThrow(
-                () ->    new NullPointerException("Á¸ÀçÇÏÁö ¾Ê´Â ´ñ±ÛÀÔ´Ï´Ù.")
+                () ->    new NullPointerException("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ëŒ“ê¸€ì…ë‹ˆë‹¤.")
         );
         if(comment.getUser().getUsername().equals(userDetails.getUsername())){
             commentRepository.delete(comment);
-            return new StatusResponseDto("´ñ±Û »èÁ¦ ¿Ï·á", HttpStatus.OK);
+            return new StatusResponseDto("ëŒ“ê¸€ ì‚­ì œ ì™„ë£Œ", HttpStatus.OK);
         }
-        return new StatusResponseDto("Á÷Á¢ ÀÛ¼ºÇÑ °Ô½Ã±Û¸¸ ¼öÁ¤ÇÒ ¼ö ÀÖ½À´Ï´Ù.",HttpStatus.BAD_REQUEST);
+        return new StatusResponseDto("ì§ì ‘ ì‘ì„±í•œ ê²Œì‹œê¸€ë§Œ ì‚­ì œí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.",HttpStatus.BAD_REQUEST);
     }
 
 }

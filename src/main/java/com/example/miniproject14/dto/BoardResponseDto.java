@@ -19,7 +19,7 @@ public class BoardResponseDto implements GeneralResponseDto{
     private String nickname;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
-    private List<String> applicantsNicknames;
+    private List<String> applyUsers;
 
     public BoardResponseDto(Board board){
         this.id = board.getId();
@@ -31,9 +31,9 @@ public class BoardResponseDto implements GeneralResponseDto{
         this.nickname= board.getNickname();
         this.createdAt = board.getCreatedAt();
         this.modifiedAt = board.getModifiedAt();
-        this.applicantsNicknames = board.getApplicants().stream()
+        this.applyUsers = board.getApplicants().stream()
                 .map(applicant -> applicant.getUser().getNickname())
                 .collect(Collectors.toList());
-        this.memberNum = this.applicantsNicknames.size();
+        this.memberNum = this.applyUsers.size();
     }
 }
