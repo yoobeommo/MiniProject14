@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -47,8 +48,13 @@ public class WebSecurityConfig {
 
         http.authorizeRequests().antMatchers("/users/**").permitAll()
                 .antMatchers("/boards/**").permitAll()
+                .antMatchers("/", "/h2-console/**", "/events", "/events/*").permitAll()
 //                .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
+                .and()
+                .csrf()
+                .ignoringAntMatchers("/h2-console/**")
+                .and().headers().frameOptions().sameOrigin()
                 // JWT 인증/인가를 사용하기 위한 설정
                 .and().addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
