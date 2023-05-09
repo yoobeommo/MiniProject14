@@ -67,7 +67,9 @@ public class CommentService {
             commentRepository.delete(comment);
             return new StatusResponseDto("댓글 삭제 완료", HttpStatus.OK);
         }
+
         return new StatusResponseDto("직접 작성한 게시글만 삭제할 수 있습니다.",HttpStatus.BAD_REQUEST);
+
     }
 
 }
