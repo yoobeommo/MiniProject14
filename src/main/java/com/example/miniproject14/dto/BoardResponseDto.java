@@ -1,7 +1,6 @@
 package com.example.miniproject14.dto;
 
 import com.example.miniproject14.entity.Board;
-import com.example.miniproject14.entity.Comment;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

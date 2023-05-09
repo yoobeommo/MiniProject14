@@ -24,8 +24,6 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository;
-    private final UserRepository userRepository;
-    private final JwtUtil jwtUtil;
     private final CommentRepository commentRepository;
 
 
@@ -62,8 +60,7 @@ public class BoardService {
                 commentResponseDtoList.add(new CommentResponseDto(comment));
             }
 
-            // 게시물 조회 시 지원자 정보를 추가로 조회
-            board.getApplicants().size(); // FetchType.LAZY로 인해 지원자 정보를 로드하기 위해 size() 메서드를 호출
+            board.getApplicants().size();
 
             return new BoardResponseDto(board, commentResponseDtoList);
         } catch (NullPointerException e) {
