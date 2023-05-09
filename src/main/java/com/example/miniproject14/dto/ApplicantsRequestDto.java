@@ -13,6 +13,4 @@ import java.time.LocalDateTime;
 public class ApplicantsRequestDto {
     private Long boardId; // board 객체 대신 boardId 필드를 사용
 
-    private User user;
-
 }
