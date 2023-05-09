@@ -46,9 +46,4 @@ public class BoardController {
     public StatusResponseDto deleteBoard(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return boardService.deleteBoard(id, userDetails);
     }
-
-
-
-
-
 }

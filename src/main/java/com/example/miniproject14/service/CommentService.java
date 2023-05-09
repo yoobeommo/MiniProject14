@@ -50,6 +50,7 @@ public class CommentService {
         );
         // User 의 username 필드는 (아마 loginid) uniqe 값이기 때문에 같은 사용자인지 판별하기 위해 사용 :: userDetails.impl 에서 id 를 반환하는 메서드가 있으면 좋을 듯
         if(comment.getUser().getUsername().equals(userDetails.getUsername())){
+//            User user = userDetails.getUser();
             comment.update(requestDto);
             return new StatusResponseDto("댓글 수정 완료", HttpStatus.OK);
         }
@@ -66,7 +67,9 @@ public class CommentService {
             commentRepository.delete(comment);
             return new StatusResponseDto("댓글 삭제 완료", HttpStatus.OK);
         }
-        return new StatusResponseDto("직접 작성한 게시글만 수정할 수 있습니다.",HttpStatus.BAD_REQUEST);
+
+        return new StatusResponseDto("직접 작성한 게시글만 삭제할 수 있습니다.",HttpStatus.BAD_REQUEST);
+
     }
 
 }

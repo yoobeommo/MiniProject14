@@ -26,8 +26,11 @@ public class Comment extends Timestamped{
 
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id")  //user_id로
     private User user;
+
+    @Column(nullable = false)
+    private String nickname;
 
     @Column(nullable = false)
     private String contents;
@@ -43,9 +46,11 @@ public class Comment extends Timestamped{
         this.board = board;
         this.user = user;
         this.contents = requestDto.getContents();
+        this.nickname = user.getNickname();
     }
 
     public void update(CommentRequestDto requestDto){
         this.contents = requestDto.getContents();
+//        this.nickname = user.getNickname();
     }
 }

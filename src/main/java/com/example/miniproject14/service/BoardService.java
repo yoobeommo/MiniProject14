@@ -1,13 +1,12 @@
 package com.example.miniproject14.service;
 
-import com.example.miniproject14.dto.BoardRequestDto;
-import com.example.miniproject14.dto.BoardResponseDto;
-import com.example.miniproject14.dto.GeneralResponseDto;
-import com.example.miniproject14.dto.StatusResponseDto;
+import com.example.miniproject14.dto.*;
 import com.example.miniproject14.entity.Board;
+import com.example.miniproject14.entity.Comment;
 import com.example.miniproject14.entity.User;
 import com.example.miniproject14.jwt.JwtUtil;
 import com.example.miniproject14.repository.BoardRepository;
+import com.example.miniproject14.repository.CommentRepository;
 import com.example.miniproject14.repository.UserRepository;
 import com.example.miniproject14.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +26,7 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
+    private final CommentRepository commentRepository;
 
 
     @Transactional
@@ -55,11 +55,17 @@ public class BoardService {
 
         try {
             Board board = findBoardById(id);
+            List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
+            List<Comment> commentList = commentRepository.findAllByboard_id(id);
+
+            for(Comment comment : commentList) {
+                commentResponseDtoList.add(new CommentResponseDto(comment));
+            }
 
             // 게시물 조회 시 지원자 정보를 추가로 조회
             board.getApplicants().size(); // FetchType.LAZY로 인해 지원자 정보를 로드하기 위해 size() 메서드를 호출
 
-            return new BoardResponseDto(board);
+            return new BoardResponseDto(board, commentResponseDtoList);
         } catch (NullPointerException e) {
             return new StatusResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
