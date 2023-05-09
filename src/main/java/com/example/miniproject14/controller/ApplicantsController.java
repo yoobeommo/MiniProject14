@@ -23,9 +23,7 @@ public class ApplicantsController {
     @PostMapping("/applicants")
     public GeneralResponseDto AddApplicants(@RequestBody ApplicantsRequestDto applicantsRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         try {
-
             Board board = boardService.findBoardById(applicantsRequestDto.getBoardId()); // getBoard() 대신 getBoardId()를 사용
-
             return applicantsService.addApplicants(board, userDetails.getUser());
         } catch (Exception e) {
             return new ResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST.value()); // 예외 발생시 에러 내용, Httpstatus(400)을 리턴값으로 전달한다.
@@ -34,7 +32,7 @@ public class ApplicantsController {
 
     @ResponseBody
     @DeleteMapping("/applicants")
-    public ResponseDto DeleteApplicants(@RequestBody ApplicantsRequestDto applicantsRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public GeneralResponseDto DeleteApplicants(@RequestBody ApplicantsRequestDto applicantsRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         try {
             return applicantsService.deleteApplicants(applicantsRequestDto, userDetails.getUser());
         } catch (Exception e) {
