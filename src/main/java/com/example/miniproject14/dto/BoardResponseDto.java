@@ -10,7 +10,8 @@ import java.util.stream.Collectors;
 
 @Getter
 public class BoardResponseDto implements GeneralResponseDto{
-    private Long id;
+    private Long boardId;
+    private Long userId;
     private String type;
     private String title;
     private String date;
@@ -26,7 +27,8 @@ public class BoardResponseDto implements GeneralResponseDto{
 
 
     public BoardResponseDto(Board board){
-        this.id = board.getId();
+        this.boardId = board.getId();
+        this.userId = board.getUser().getId();
         this.type =board.getType();
         this.title = board.getTitle();
         this.date= board.getDate();
@@ -38,11 +40,11 @@ public class BoardResponseDto implements GeneralResponseDto{
         this.applyUsers = board.getApplicants().stream()
                 .map(applicant -> applicant.getUser().getNickname())
                 .collect(Collectors.toList());
-        this.memberNum = this.applyUsers.size();
-    }
+        this.memberNum = this.applyUsers.size();    }
 
     public BoardResponseDto(Board board, List<CommentResponseDto> commentResponseDtoList){
-        this.id = board.getId();
+        this.boardId = board.getId();
+        this.userId = board.getUser().getId();
         this.type =board.getType();
         this.title = board.getTitle();
         this.date= board.getDate();
