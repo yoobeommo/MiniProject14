@@ -50,7 +50,7 @@ public class WebSecurityConfig {
         configuration.setAllowedMethods(Arrays.asList("POST","GET","DELETE","PUT","PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
-        configuration.addExposedHeader("*");
+        configuration.addExposedHeader("Authorization");
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -90,4 +90,5 @@ public class WebSecurityConfig {
         return http.build();
 
     }
+
 }
