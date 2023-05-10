@@ -31,13 +31,6 @@ public class WebSecurityConfig {
     }
 
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        // h2-console 사용 및 resources 접근 허용 설정
-        return (web) -> web.ignoring()
-                .requestMatchers(PathRequest.toH2Console())
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -48,13 +41,8 @@ public class WebSecurityConfig {
 
         http.authorizeRequests().antMatchers("/users/**").permitAll()
                 .antMatchers("/boards/**").permitAll()
-                .antMatchers("/", "/h2-console/**", "/events", "/events/*").permitAll()
 //                .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .csrf()
-                .ignoringAntMatchers("/h2-console/**")
-                .and().headers().frameOptions().sameOrigin()
                 // JWT 인증/인가를 사용하기 위한 설정
                 .and().addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
