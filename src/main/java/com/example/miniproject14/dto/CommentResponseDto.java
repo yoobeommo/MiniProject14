@@ -2,6 +2,7 @@ package com.example.miniproject14.dto;
 
 import com.example.miniproject14.entity.Comment;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
