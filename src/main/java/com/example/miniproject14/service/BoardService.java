@@ -58,7 +58,7 @@ public class BoardService {
                 commentResponseDtoList.add(new CommentResponseDto(comment));
             }
 
-            board.getApplicants().size();
+//            board.getApplicants().size();
 
             return new BoardResponseDto(board, commentResponseDtoList);
         } catch (NullPointerException e) {
