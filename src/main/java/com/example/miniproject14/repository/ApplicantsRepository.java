@@ -7,6 +7,5 @@ import java.util.Optional;
 
 public interface ApplicantsRepository extends JpaRepository<Applicants, Long> {
     void deleteByUserIdAndBoardId(Long userId, Long boardId);
-    Optional<Applicants> findByUserIdAndBoardId(Long userId, Long boardId);
 
 }

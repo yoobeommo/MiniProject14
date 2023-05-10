@@ -59,7 +59,7 @@ public class BoardService {
             }
 
             return new BoardResponseDto(board, commentResponseDtoList);
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             return new StatusResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
@@ -75,15 +75,9 @@ public class BoardService {
                 return new StatusResponseDto("수정 완료", HttpStatus.OK);
             }
             return new StatusResponseDto("직접 작성한 게시글만 수정할 수 있습니다.",HttpStatus.BAD_REQUEST);
-        }catch(NullPointerException e){
+        }catch(Exception e){
             return new StatusResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-    }
-
-    public Board findBoardById(Long id) throws NullPointerException{
-        return boardRepository.findById(id).orElseThrow(
-                ()-> new NullPointerException("존재하지 않는 게시글입니다.")
-        );
     }
 
     @Transactional
@@ -95,10 +89,16 @@ public class BoardService {
                 return new StatusResponseDto("삭제완료", HttpStatus.OK);
             }
             return new StatusResponseDto("직접 작성한 게시글만 삭제할 수 있습니다.", HttpStatus.BAD_REQUEST);
-        }catch (NullPointerException e){
+        }catch (Exception e){
             return new StatusResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST);
 
         }
+    }
+
+    public Board findBoardById(Long id) throws NullPointerException{
+        return boardRepository.findById(id).orElseThrow(
+                ()-> new NullPointerException("존재하지 않는 게시글입니다.")
+        );
     }
 
 
