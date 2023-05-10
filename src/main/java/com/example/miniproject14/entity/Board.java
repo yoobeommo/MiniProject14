@@ -1,7 +1,6 @@
 package com.example.miniproject14.entity;
 
 import com.example.miniproject14.dto.BoardRequestDto;
-import com.example.miniproject14.dto.BoardResponseDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -45,14 +44,14 @@ public class Board extends Timestamped {
     @JoinColumn
     private User user;
 
-    // 1:N 연관관계 설정
+
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Applicants> applicants = new ArrayList<>();
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> commentList = new ArrayList<>();
 
-    // Getter를 수정하여 실시간으로 참가자 수를 계산
+
     public int getMemberNum() {
         return applicants.size();
     }
@@ -61,7 +60,6 @@ public class Board extends Timestamped {
         this.type = requestDto.getType();
         this.title = requestDto.getTitle();
         this.date = requestDto.getDate();
-//        this.memberNum = requestDto.getMemberNum();
         this.totalMember = requestDto.getTotalMember();
         this.contents = requestDto.getContents();
         this.nickname = requestDto.getNickname();
@@ -71,7 +69,6 @@ public class Board extends Timestamped {
         this.type = requestDto.getType();
         this.title = requestDto.getTitle();
         this.date = requestDto.getDate();
-//        this.memberNum = requestDto.getMemberNum();
         this.totalMember = requestDto.getTotalMember();
         this.contents = requestDto.getContents();
     }

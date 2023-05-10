@@ -1,8 +1,6 @@
 package com.example.miniproject14.service;
 
-import com.example.miniproject14.dto.LoginRequestDto;
-import com.example.miniproject14.dto.ResponseDto;
-import com.example.miniproject14.dto.SignupRequestDto;
+import com.example.miniproject14.dto.*;
 import com.example.miniproject14.entity.User;
 import com.example.miniproject14.entity.UserRoleEnum;
 import com.example.miniproject14.jwt.JwtUtil;
@@ -27,7 +25,7 @@ public class UserService {
 
 
     @Transactional
-    public ResponseDto signup(SignupRequestDto signupRequestDto) {
+    public GeneralResponseDto signup(SignupRequestDto signupRequestDto) {
         String username = signupRequestDto.getUsername();
         String nickname = signupRequestDto.getNickname();
         String password = passwordEncoder.encode(signupRequestDto.getPassword());
@@ -49,11 +47,11 @@ public class UserService {
 
         User user = new User(username, nickname, password, role);
         userRepository.save(user);
-        return new ResponseDto("회원 가입 완료!", HttpStatus.OK.value());                  // DB에 정상적으로 저장 되었을 경우 결과 리턴
+        return new StatusResponseDto("회원 가입 완료!", HttpStatus.OK);                  // DB에 정상적으로 저장 되었을 경우 결과 리턴
     }
 
     @Transactional(readOnly = true)
-    public ResponseDto login(LoginRequestDto loginRequestDto, HttpServletResponse response) {
+    public GeneralResponseDto login(LoginRequestDto loginRequestDto, HttpServletResponse response) {
         String username = loginRequestDto.getUsername();
         String password = loginRequestDto.getPassword();
 
@@ -68,6 +66,6 @@ public class UserService {
 
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(user.getUsername(), user.getRole()));
 
-        return new ResponseDto("로그인 완료!", HttpStatus.OK.value());
+        return new StatusResponseDto("로그인 완료!", HttpStatus.OK);
     }
 }
