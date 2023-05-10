@@ -4,9 +4,12 @@ import com.example.miniproject14.dto.GeneralResponseDto;
 import com.example.miniproject14.dto.LoginRequestDto;
 import com.example.miniproject14.dto.SignupRequestDto;
 import com.example.miniproject14.dto.StatusResponseDto;
+import com.example.miniproject14.entity.User;
+import com.example.miniproject14.security.UserDetailsImpl;
 import com.example.miniproject14.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;

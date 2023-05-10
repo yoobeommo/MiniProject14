@@ -5,6 +5,7 @@ import com.example.miniproject14.entity.User;
 import com.example.miniproject14.entity.UserRoleEnum;
 import com.example.miniproject14.jwt.JwtUtil;
 import com.example.miniproject14.repository.UserRepository;
+import com.example.miniproject14.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class UserService {
         // 회원 중복 확인
         Optional<User> found = userRepository.findByUsername(username);
         if (found.isPresent()) {
-            throw new IllegalArgumentException("중복된 username 입니다.");
+            throw new IllegalArgumentException("중복된 ID 입니다.");
         }
 
         // 사용자 ROLE 확인
@@ -52,20 +53,28 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public GeneralResponseDto login(LoginRequestDto loginRequestDto, HttpServletResponse response) {
-        String username = loginRequestDto.getUsername();
-        String password = loginRequestDto.getPassword();
+        try {
+            String username = loginRequestDto.getUsername();
+            String password = loginRequestDto.getPassword();
 
-        // 사용자 확인
-        User user = userRepository.findByUsername(username).orElseThrow(
-                () -> new IllegalArgumentException("회원을 찾을 수 없습니다.")
-        );
-        // 비밀번호 확인
-        if(!passwordEncoder.matches(password, user.getPassword())){
-            throw  new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-        }
+            // 사용자 확인
 
-        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(user.getUsername(), user.getRole()));
+            User user = userRepository.findByUsername(username).orElseThrow(
+                    () -> new IllegalArgumentException("회원을 찾을 수 없습니다.")
+            );
 
-        return new StatusResponseDto("로그인 완료!", HttpStatus.OK);
+            // 비밀번호 확인
+            if (!passwordEncoder.matches(password, user.getPassword())) {
+                throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+            }
+
+            response.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(user.getUsername(), user.getRole()));
+
+
+            return new LoginResponseDto(user);
+        }catch (Exception e) {
+                return new StatusResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST);
+            }
     }
+
 }
