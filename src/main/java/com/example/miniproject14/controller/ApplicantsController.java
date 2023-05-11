@@ -20,6 +20,7 @@ public class ApplicantsController {
     private final ApplicantsService applicantsService;
     private final BoardService boardService;
 
+
     @ResponseBody
     @PostMapping("/applicants")
     public GeneralResponseDto AddApplicants(@RequestBody ApplicantsRequestDto applicantsRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
@@ -27,7 +28,7 @@ public class ApplicantsController {
 
             Board board = boardService.findBoardById(applicantsRequestDto.getBoardId()); // getBoard() 대신 getBoardId()를 사용
 
-            return applicantsService.addApplicants(board, userDetails.getUser());
+            return applicantsService.addApplicants(board, userDetails);
         } catch (Exception e) {
             return new StatusResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST); // 예외 발생시 에러 내용, Httpstatus(400)을 리턴값으로 전달한다.
         }
@@ -38,7 +39,7 @@ public class ApplicantsController {
     public GeneralResponseDto  DeleteApplicants(@RequestBody ApplicantsRequestDto applicantsRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         try {
             Board board = boardService.findBoardById(applicantsRequestDto.getBoardId()); // getBoard() 대신 getBoardId()를 사용
-            return applicantsService.deleteApplicants(board, userDetails.getUser());
+            return applicantsService.deleteApplicants(board, userDetails);
         } catch (Exception e) {
             return new StatusResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST); // 예외 발생시 에러 내용, Httpstatus(400)을 리턴값으로 전달한다.!
         }
