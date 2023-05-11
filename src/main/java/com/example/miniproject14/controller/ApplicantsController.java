@@ -37,7 +37,8 @@ public class ApplicantsController {
     @DeleteMapping("/applicants")
     public GeneralResponseDto  DeleteApplicants(@RequestBody ApplicantsRequestDto applicantsRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         try {
-            return applicantsService.deleteApplicants(applicantsRequestDto, userDetails.getUser());
+            Board board = boardService.findBoardById(applicantsRequestDto.getBoardId()); // getBoard() 대신 getBoardId()를 사용
+            return applicantsService.deleteApplicants(board, userDetails.getUser());
         } catch (Exception e) {
             return new StatusResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST); // 예외 발생시 에러 내용, Httpstatus(400)을 리턴값으로 전달한다.!
         }
