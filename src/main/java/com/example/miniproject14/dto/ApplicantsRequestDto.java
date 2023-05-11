@@ -1,12 +1,9 @@
 package com.example.miniproject14.dto;
 
-import com.example.miniproject14.entity.Board;
-import com.example.miniproject14.entity.User;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+
 
 @Getter
 @Setter

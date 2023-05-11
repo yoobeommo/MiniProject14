@@ -9,7 +9,6 @@ import com.example.miniproject14.security.UserDetailsImpl;
 import com.example.miniproject14.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 @RestController // @Controller 어노테이션은 html을 반환하기 때문에 RestController를 사용함
 @RequiredArgsConstructor
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:3000") // 컨트롤러에서 설정
 public class UserController {
 
     private final UserService userService;

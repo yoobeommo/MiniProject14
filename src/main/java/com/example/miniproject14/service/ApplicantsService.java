@@ -1,11 +1,9 @@
 package com.example.miniproject14.service;
 
-import com.example.miniproject14.dto.ApplicantsRequestDto;
 import com.example.miniproject14.dto.GeneralResponseDto;
 import com.example.miniproject14.dto.StatusResponseDto;
 import com.example.miniproject14.entity.Applicants;
 import com.example.miniproject14.entity.Board;
-import com.example.miniproject14.entity.User;
 import com.example.miniproject14.repository.ApplicantsRepository;
 import com.example.miniproject14.repository.UserRepository;
 import com.example.miniproject14.security.UserDetailsImpl;

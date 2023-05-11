@@ -1,6 +1,6 @@
 package com.example.miniproject14.entity;
 
-import com.example.miniproject14.dto.ApplicantsRequestDto;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -3,7 +3,6 @@ package com.example.miniproject14.service;
 import com.example.miniproject14.dto.*;
 import com.example.miniproject14.entity.Board;
 import com.example.miniproject14.entity.Comment;
-import com.example.miniproject14.entity.User;
 import com.example.miniproject14.jwt.JwtUtil;
 import com.example.miniproject14.repository.BoardRepository;
 import com.example.miniproject14.repository.CommentRepository;
@@ -68,7 +67,7 @@ public class CommentService {
             return new StatusResponseDto("댓글 삭제 완료", HttpStatus.OK);
         }
 
-        return new StatusResponseDto("직접 작성한 게시글만 삭제할 수 있습니다.",HttpStatus.BAD_REQUEST);
+        return new StatusResponseDto("직접 작성한 댓글만 삭제할 수 있습니다.",HttpStatus.BAD_REQUEST);
 
     }
 

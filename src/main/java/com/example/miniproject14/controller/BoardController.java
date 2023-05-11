@@ -15,7 +15,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000") // 컨트롤러에서 설정
 public class BoardController {
 
     private final BoardService boardService;

@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000") // 컨트롤러에서 설정
 public class CommentController {
 
     private final CommentService commentService;

@@ -5,7 +5,6 @@ import com.example.miniproject14.entity.User;
 import com.example.miniproject14.entity.UserRoleEnum;
 import com.example.miniproject14.jwt.JwtUtil;
 import com.example.miniproject14.repository.UserRepository;
-import com.example.miniproject14.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

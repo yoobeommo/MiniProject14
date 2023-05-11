@@ -46,7 +46,7 @@ public class WebSecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://miniproject-studygroup.s3-website.ap-northeast-2.amazonaws.com/"));
         configuration.setAllowedMethods(Arrays.asList("POST","GET","DELETE","PUT","PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
@@ -75,7 +75,7 @@ public class WebSecurityConfig {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        //토큰없이 요청가능한 url /member/**, /show/** 그외에는 권환학인 필수
+        //토큰없이 요청가능한 url /users/**, /boards/** 그외에는 권환학인 필수
         http
                 .authorizeRequests()
                 .antMatchers("/users/**").permitAll()
