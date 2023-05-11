@@ -24,7 +24,7 @@ public class Applicants extends Timestamped{
 
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
 
