@@ -24,7 +24,6 @@ public class ApplicantsService {
 
     @Transactional
     public GeneralResponseDto addApplicants(Board board, UserDetailsImpl userDetails) {
-        System.out.println(userDetails.getUser().getId());
         if(userDetails.getUser() == null){
             throw new IllegalArgumentException("로그인이 필요합니다");
         }
@@ -48,7 +47,6 @@ public class ApplicantsService {
         }
         try {
             applicantsRepository.deleteByUserIdAndBoardId(userDetails.getUser().getId(), board.getId());
-            board.setMemberNum(board.getMemberNum() - 1);
             return new StatusResponseDto("신청이 취소되었습니다.", HttpStatus.OK); // DB에 정상적으로 저장 되었을 경우 결과 리턴
         }catch(Exception e){
             return new StatusResponseDto(e.getMessage(), HttpStatus.BAD_REQUEST);
